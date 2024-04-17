@@ -8,12 +8,30 @@
 import SwiftUI
 
 struct ListView: View {
+    
+    @State var items: [String] = [
+        "First item",
+        "Second item",
+        "Third item"
+        
+    ]
+    
     var body: some View {
-        List{
-            ListRowView(title: "This is the title")
+        
 
+        List{
+            ForEach(items, id: \.self) { item in
+                ListRowView(title: item)
+            }
+            
         }
+        .listStyle(.inset)
         .navigationTitle("ToDo List 📋")
+        .navigationBarItems(
+            leading: EditButton(),
+            trailing:
+                NavigationLink("Add", destination: AddView())
+        )
     }
 }
 
